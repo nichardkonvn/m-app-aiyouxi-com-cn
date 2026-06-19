@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nichardkonvn.github.io/m-app-aiyouxi-com-cn/sitemap.xml
