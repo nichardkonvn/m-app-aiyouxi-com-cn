@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>产品说明 · 澳门六合彩</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f9f6f1;
+      font-family: 'Segoe UI', 'PingFang SC', Roboto, system-ui, -apple-system, sans-serif;
+      color: #2a2a2a;
+      line-height: 1.7;
+      padding: 2rem 1.5rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 860px;
+      width: 100%;
+      background: #fffcf8;
+      border-radius: 28px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.02);
+      padding: 2.8rem 2.5rem;
+      margin: 1rem 0 2rem 0;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem 0.8rem;
+      }
+      .container {
+        padding: 2rem 1.2rem;
+        border-radius: 20px;
+      }
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      color: #1e1e1e;
+      margin-bottom: 0.3rem;
+      line-height: 1.2;
+      border-left: 6px solid #bd8b5a;
+      padding-left: 1.2rem;
+    }
+
+    .subhead {
+      font-size: 1rem;
+      color: #7a6e5e;
+      margin: 0.4rem 0 1.8rem 0;
+      padding-left: 1.2rem;
+      border-left: 6px solid #dcc7b1;
+      font-weight: 400;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin: 2rem 0 0.8rem 0;
+      color: #2e2b27;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid #ece3d9;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      text-align: justify;
+    }
+
+    .intro-highlight {
+      background: #f3ede6;
+      border-radius: 16px;
+      padding: 1.5rem 1.8rem;
+      margin: 1.5rem 0 1.8rem 0;
+      border-left: 4px solid #b5835a;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin: 1.2rem 0 0.8rem 0;
+    }
+
+    @media (max-width: 520px) {
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .feature-card {
+      background: #fcf9f5;
+      border-radius: 18px;
+      padding: 1.2rem 1.4rem;
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8), 0 2px 6px rgba(0, 0, 0, 0.02);
+      border: 1px solid #ede6dc;
+    }
+
+    .feature-card strong {
+      display: block;
+      font-weight: 600;
+      color: #4f3f2f;
+      margin-bottom: 0.3rem;
+      font-size: 1.05rem;
+    }
+
+    .scenario-box {
+      display: flex;
+      flex-wrap: wrap;
+      background: #f7f1ea;
+      border-radius: 20px;
+      padding: 1.5rem 1.8rem;
+      margin: 1.8rem 0 1.5rem 0;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .scenario-item {
+      flex: 1 1 180px;
+    }
+
+    .scenario-item span {
+      font-weight: 500;
+      color: #4b3a2b;
+    }
+
+    .scenario-item p {
+      font-size: 0.95rem;
+      margin: 0.2rem 0 0 0;
+    }
+
+    .callout-note {
+      background: #e7ddd0;
+      border-radius: 14px;
+      padding: 1rem 1.5rem;
+      margin: 2rem 0 1.2rem 0;
+      font-size: 0.95rem;
+      color: #2f281f;
+      border: 1px solid #d6c8b8;
+    }
+
+    .callout-note strong {
+      font-weight: 600;
+    }
+
+    .faq-block {
+      margin-top: 1.8rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1rem;
+      padding: 0.8rem 0 0.4rem 0;
+      border-bottom: 1px dashed #ddcfbf;
+    }
+
+    .faq-item q {
+      font-weight: 500;
+      font-style: normal;
+      color: #3b332b;
+    }
+
+    .faq-item p {
+      margin: 0.3rem 0 0 0;
+      font-size: 0.95rem;
+      color: #4c443c;
+    }
+
+    a {
+      color: #8a6a48;
+      text-decoration: none;
+      border-bottom: 1px solid #cbb297;
+      transition: border-color 0.15s, color 0.15s;
+      font-weight: 500;
+    }
+
+    a:hover {
+      color: #5d432c;
+      border-bottom-color: #7c5f41;
+    }
+
+    .footer-note {
+      margin-top: 2.5rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid #e7dbce;
+      font-size: 0.85rem;
+      color: #7d7162;
+      text-align: center;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #e6dace;
+      color: #3f352c;
+      padding: 0.15rem 0.8rem;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      margin-right: 0.4rem;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>澳门六合彩</h1>
+  <div class="subhead">产品说明 · 稳定入口 · 使用场景</div>
+
+  <p>
+    <span class="tag">摘要</span>
+    <a href="https://webs--macaujc.com">澳门六合彩</a> 作为一个长期运营的信息型平台，主要面向对传统六合彩内容有了解需求的用户。页面结构经过多次优化，兼顾了不同网络环境下的可访问性。以下从产品定位、核心特点、使用建议及必要提示四个维度进行说明，帮助新用户快速建立认知。
+  </p>
+
+  <div class="intro-highlight">
+    <strong style="display:block; margin-bottom:0.3rem;">📌 产品定位</strong>
+    本平台不涉及任何投注、交易或即时博彩功能，仅提供关于六合彩规则、历史开奖号码汇总以及玩法说明的资讯内容。适合希望系统了解六合彩机制、查阅历史数据的用户。
+  </div>
+
+  <h2>▎核心特点</h2>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <strong>📋 结构化资料</strong>
+      所有内容分类清晰，包含玩法说明、历史开奖、常见术语等模块，方便快速检索与对照。
+    </div>
+    <div class="feature-card">
+      <strong>🌐 稳定访问</strong>
+      针对不同地区网络进行了入口适配，页面加载速度稳定，减少等待时间。
+    </div>
+    <div class="feature-card">
+      <strong>📱 移动端友好</strong>
+      排版跟随屏幕自适应，在手机与平板上阅读体验一致，无需频繁缩放。
+    </div>
+    <div class="feature-card">
+      <strong>🔒 低干扰环境</strong>
+      页面无弹窗、无诱导跳转，内容呈现克制，专注信息本身。
+    </div>
+  </div>
+
+  <h2>▎使用建议</h2>
+  <div class="scenario-box">
+    <div class="scenario-item">
+      <span>🎯 规则查阅</span>
+      <p>适合初次接触六合彩玩法，需要全面了解奖级、选号方式及派彩逻辑的用户。</p>
+    </div>
+    <div class="scenario-item">
+      <span>📊 历史参考</span>
+      <p>长期关注开奖数据、进行趋势观察或学术研究的用户，可借助平台存档记录。</p>
+    </div>
+    <div class="scenario-item">
+      <span>🧾 术语对照</span>
+      <p>遇到“二全中”“特码”“连码”等专业词汇时，平台术语表可提供简洁释义。</p>
+    </div>
+  </div>
+
+  <div class="callout-note">
+    <strong>⚡ 访问说明：</strong> 
+    若在部分网络环境下遇到加载延迟，可尝试刷新或稍后重试。平台未使用任何强制跳转或第三方广告脚本，所有内容均直接呈现。如需访问主站，请直接点击文中 
+    <a href="https://webs--macaujc.com">澳门六合彩</a> 链接，在浏览器中保持常规网络设置即可。
+  </div>
+
+  <h2>▎常见问题摘要</h2>
+  <div class="faq-block">
+    <div class="faq-item">
+      <q>是否需要注册或登录才能查看内容？</q>
+      <p>不需要。所有资讯页面均为开放访问，无需注册、登录或提供个人信息。</p>
+    </div>
+    <div class="faq-item">
+      <q>页面中的开奖数据是实时更新的吗？</q>
+      <p>平台会在每期官方开奖后更新记录，具体更新频率可参考页面顶部标注的时间戳。数据仅供参考，请以官方公告为准。</p>
+    </div>
+    <div class="faq-item">
+      <q>移动端打开页面排版会乱吗？</q>
+      <p>不会。页面已做响应式适配，在主流浏览器和屏幕尺寸下均可正常阅读。若出现异常，建议更新浏览器版本。</p>
+    </div>
+    <div class="faq-item">
+      <q>能否通过平台参与六合彩投注？</q>
+      <p>不能。本站仅提供信息说明与历史资料，不涉及任何投注、交易或博彩服务。</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    本页面仅为产品介绍用途，内容客观中立，不构成任何投资或博彩建议。请用户理性判断，合规使用。<br>
+    如需查阅完整信息，可直接访问 <a href="https://webs--macaujc.com">澳门六合彩</a>。
+  </div>
+</div>
+</body>
+</html>
