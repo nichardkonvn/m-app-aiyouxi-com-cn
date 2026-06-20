@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2, user-scalable=yes">
+    <title>cnx-mahjong · 麻将胡了</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f9fc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            color: #1e2b3a;
+            line-height: 1.6;
+            padding: 1.5rem 1rem 3rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1080px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* 网格卡片装饰背景（极浅辅助） */
+        .container::before {
+            content: "";
+            display: block;
+            height: 4px;
+            background: repeating-linear-gradient(90deg, #b8d4e3 0px, #b8d4e3 2px, transparent 2px, transparent 12px);
+            margin-bottom: 2rem;
+            opacity: 0.3;
+        }
+
+        /* hero 开场短句 */
+        .hero-tag {
+            font-size: 1.1rem;
+            letter-spacing: 0.03em;
+            color: #2a6f7c;
+            font-weight: 500;
+            border-left: 4px solid #3d9aa8;
+            padding-left: 1rem;
+            margin: 1.8rem 0 0.6rem;
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            line-height: 1.2;
+            color: #14333d;
+            margin: 0.2rem 0 0.8rem;
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            color: #3d5e6b;
+            max-width: 680px;
+            margin-bottom: 1.2rem;
+        }
+
+        /* 承接段落 */
+        .intro-block {
+            background: #ffffffd9;
+            backdrop-filter: blur(1px);
+            padding: 1.6rem 2rem;
+            border-radius: 28px;
+            box-shadow: 0 6px 20px rgba(32, 77, 88, 0.06);
+            margin: 1rem 0 2.2rem;
+            border: 1px solid #dbeaf0;
+        }
+
+        .intro-block p {
+            margin-bottom: 1rem;
+        }
+
+        .intro-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        .inline-link {
+            color: #1a7a8c;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1.5px solid #9ec9d4;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .inline-link:hover {
+            border-bottom-color: #1a7a8c;
+            color: #0b525f;
+        }
+
+        /* 特点列表 —— 网格卡片 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            margin: 2.2rem 0 2.5rem;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.6rem 1.2rem 1.4rem;
+            box-shadow: 0 4px 12px rgba(43, 102, 114, 0.05);
+            border: 1px solid #d9e9ef;
+            transition: transform 0.15s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 95, 108, 0.08);
+            border-color: #b0d3de;
+        }
+
+        .feature-icon {
+            font-size: 1.6rem;
+            margin-bottom: 0.4rem;
+            display: inline-block;
+            color: #267683;
+        }
+
+        .feature-label {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #14333d;
+            margin-bottom: 0.4rem;
+        }
+
+        .feature-desc {
+            font-size: 0.92rem;
+            color: #3c5b67;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        /* 温和提示 + 摘要区 */
+        .note-area {
+            background: #e8f2f6;
+            border-radius: 30px;
+            padding: 1.8rem 2rem;
+            margin: 1.2rem 0 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            align-items: flex-start;
+        }
+
+        .note-item {
+            flex: 1 1 180px;
+        }
+
+        .note-item strong {
+            display: block;
+            color: #174a56;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .note-item span {
+            color: #2d5f6d;
+            font-size: 0.92rem;
+        }
+
+        /* faq 摘要 —— 极简 */
+        .faq-mini {
+            background: #ffffffd0;
+            border-radius: 24px;
+            padding: 1.8rem 2rem 1.6rem;
+            margin: 1.8rem 0 1rem;
+            border: 1px solid #cde1e8;
+        }
+
+        .faq-mini h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #10414d;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-mini h3::before {
+            content: "▹";
+            margin-right: 0.6rem;
+            color: #318a9b;
+            font-size: 1.3rem;
+        }
+
+        .faq-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 1.5rem;
+            justify-content: space-between;
+        }
+
+        .faq-q {
+            font-weight: 500;
+            color: #1b4f5c;
+            min-width: 130px;
+        }
+
+        .faq-a {
+            color: #3b6675;
+            font-size: 0.95rem;
+        }
+
+        .faq-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #c5dae2;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.2rem 1rem;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        /* 温和结尾 */
+        .footer-closing {
+            margin-top: 2rem;
+            padding-top: 1.6rem;
+            border-top: 2px solid #cde0e7;
+            text-align: center;
+            color: #3c6776;
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+        }
+
+        .footer-closing a {
+            color: #185b69;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px solid #90bcc9;
+        }
+
+        .footer-closing a:hover {
+            border-bottom-color: #185b69;
+        }
+
+        /* 移动端响应 */
+        @media (max-width: 780px) {
+            .hero-title {
+                font-size: 1.9rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .intro-block {
+                padding: 1.4rem 1.2rem;
+            }
+
+            .note-area {
+                padding: 1.4rem 1.2rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .faq-mini {
+                padding: 1.4rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 0.9rem;
+            }
+
+            .hero-title {
+                font-size: 1.7rem;
+            }
+
+            body {
+                padding: 1rem 0.8rem 2.5rem;
+            }
+
+            .faq-item {
+                flex-direction: column;
+                gap: 0.1rem;
+            }
+        }
+
+        /* 辅助分割 */
+        hr.quiet {
+            border: none;
+            border-top: 1px solid #d2e3ea;
+            margin: 1.2rem 0;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- hero 开场短句 -->
+        <div class="hero-tag">稳定入口 · 清晰指引</div>
+        <h1 class="hero-title">麻将胡了<br>从第一局开始熟悉</h1>
+        <p class="hero-sub">一套为牌局爱好者准备的页面说明，围绕规则浏览、术语对照与节奏参考搭建。无需反复跳转，信息就在手边。</p>
+
+        <!-- 承接段落  -->
+        <div class="intro-block">
+            <p><a href="https://cnx-mahjong.com" class="inline-link">麻将胡了</a>是一组围绕麻将场景整理的静态说明页，聚焦于牌型图示、番种速查以及常见流程解释。没有广告干扰，也没有动态弹窗，每页内容都经过精简，适合在手机或电脑上快速参考。</p>
+            <p>站点结构以「一页一主题」为原则：从基本组合到进阶计番，从开局配牌到流局判定，大部分页面都可以在两次滑动内看完。对于希望快速确认规则细节的玩家来说，这种编排能节省不少翻找时间。</p>
+            <p>页面内容基于通用麻将规则提炼，不绑定特定地区变体，只收录最常遇到的牌型与判例。如果你正在找一份干净、可直接查阅的麻将资料页，这里或许正好合适。</p>
+        </div>
+
+        <!-- 特点卡片网格 -->
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📇</div>
+                <div class="feature-label">分类牌型卡</div>
+                <div class="feature-desc">顺子、刻子、杠、对子单独列出，配合简短说明，一眼对应牌面组合。</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧩</div>
+                <div class="feature-label">番种对照</div>
+                <div class="feature-desc">常见番种（平和、断幺、三色同顺等）附有速查释义，减少记混概率。</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <div class="feature-label">窄屏适配</div>
+                <div class="feature-desc">卡片和表格针对手机竖屏优化，无需横屏或缩放即可阅读大部分内容。</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <div class="feature-label">低噪界面</div>
+                <div class="feature-desc">无弹窗、无背景音乐、无自动播放内容，只呈现文字与必要图示。</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <div class="feature-label">独立页面</div>
+                <div class="feature-desc">每一类说明单独成页，地址清晰，可收藏或发送给牌友直接跳转。</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚖️</div>
+                <div class="feature-label">中立描述</div>
+                <div class="feature-desc">不偏向某一种规则体系，只提炼通用部分，减少争议。</div>
+            </div>
+        </div>
+
+        <!-- 温和提示 / 场景 -->
+        <div class="note-area">
+            <div class="note-item">
+                <strong>🧊 适合谁用</strong>
+                <span>刚接触麻将、想系统了解牌型的新手；偶尔需要确认番种的老手；在线下局中快速翻阅参考。</span>
+            </div>
+            <div class="note-item">
+                <strong>📌 使用场景</strong>
+                <span>茶余饭后预习规则、牌局间隙查牌型名称、向朋友解释组合构成——都不需要额外注册。</span>
+            </div>
+            <div class="note-item">
+                <strong>🔄 内容更新</strong>
+                <span>页面会按季度补充常见问题与示例图解，保持与通用规则同步。</span>
+            </div>
+        </div>
+
+        <!-- FAQ 摘要（非完整问答，只提取两三个点） -->
+        <div class="faq-mini">
+            <h3>常见疑问摘要</h3>
+            <div class="faq-row">
+                <div class="faq-item">
+                    <span class="faq-q">页面里的番种够全吗？</span>
+                    <span class="faq-a">涵盖地方场最常见 30 余种，不追求穷举，但保证核心条目都有释义。</span>
+                </div>
+                <div class="faq-item">
+                    <span class="faq-q">需要下载或安装？</span>
+                    <span class="faq-a">全部为网页，无客户端，打开即用，离线可提前保存页面。</span>
+                </div>
+                <div class="faq-item">
+                    <span class="faq-q">手机显示会变形吗？</span>
+                    <span class="faq-a">大部分卡片和表格在 320px 以上宽度均正常显示，已做响应式折行。</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 温和结尾 + 链接自然嵌入 -->
+        <div class="footer-closing">
+            <p>如果你需要一份随时可查阅的麻将资料页，不妨试试 <a href="https://cnx-mahjong.com">麻将胡了</a>。不用收藏太多碎片链接，这一处入口足够日常使用。</p>
+            <p style="margin-top: 1rem; font-size: 0.88rem; opacity: 0.7;">页面内容仅供规则参考，不涉及任何形式的游戏投注或诱导。</p>
+        </div>
+
+        <!-- 极细装饰线，无实际作用仅视觉 -->
+        <hr class="quiet">
+    </div>
+</body>
+</html>
